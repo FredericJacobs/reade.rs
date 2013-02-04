@@ -10,4 +10,4 @@
     "jade": "*",
     "stylus": "*"
   }
-}
+  "engine": "node 0.8.6"
