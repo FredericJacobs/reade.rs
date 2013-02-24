@@ -4,14 +4,19 @@
  */
 
 var express = require('express')
-  , routes = require('./routes')
-  , user = require('./routes/user')
   , http = require('http')
-  , path = require('path');
+  , path = require('path')
+  , mongoose = require('mongoose');
 
 var app = express();
 
+
+// Bootup setup 
+
 app.configure(function(){
+
+  // Express.JS Web Framework initialization
+
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
@@ -22,15 +27,33 @@ app.configure(function(){
   app.use(app.router);
   app.use(require('stylus').middleware(__dirname + '/public'));
   app.use(express.static(path.join(__dirname, 'public')));
+
+  // Setupping Mongoose <--> MongoDB
+
+  mongoose.connect('localhost', 'readers');  
+
 });
 
 app.configure('development', function(){
   app.use(express.errorHandler());
 });
 
-app.get('/', routes.index);
-app.get('/users', user.list);
-
 http.createServer(app).listen(app.get('port'), function(){
-  console.log("Express server listening on port " + app.get('port'));
+  console.log("Alright bro, the site is on ! Port :" + app.get('port'));
 });
+
+// Init the routes
+
+(require('./config/routes.js')) (app, mongoose);
+
+
+// Init the DB Schemes
+
+(require('./config/dbschemes.js')) (mongoose);
+
+
+// Launch the application
+
+(require('./app/application.js')) (mongoose, express);
+
+

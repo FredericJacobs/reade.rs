@@ -1,5 +1,5 @@
 {
-  "name": "application-name",
+  "name": "reade.rs",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -8,6 +8,8 @@
   "dependencies": {
     "express": "3.0.5",
     "jade": "*",
-    "stylus": "*"
+    "stylus": "*",
+    "mongoose":"*",
+    "git-wrapper":"*"
   }
-  "engine": "node 0.8.6"
+}
