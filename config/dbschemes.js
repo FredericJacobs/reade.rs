@@ -20,7 +20,8 @@ var storySchema = new mongoose.Schema ({
 	publishedAt : Date,
 	category : Array,
 	tags : Array,
-	post : String
+	post : String,
+	thumbnail : String
 });
 
  mongoose.model('Author', authorSchema);

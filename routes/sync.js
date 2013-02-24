@@ -10,14 +10,39 @@ module.exports = function(req, res){
 
 4) Delete all records where the sync flag is 0
 
+5) Set all flags to 0
+
 */
 
 // -1-
 
-	var git = new Git({'git-dir':'../posts/.git'})
+	Git = require ("git-wrapper");
+	var git = new Git({'git-dir':'./posts/.git', 'work-tree':"./"})
 
+	git.exec("pull", function (){
 
+	//- 2 - 
+
+	var fs = require('fs');
+	var filesNamesArray = fs.readdirSync("./posts");
+
+	// Lets only take the markdown files
+
+	for (var i=filesNamesArray.length-1; i>=0; i--) {
+	    if (filesNamesArray[i] === "README.md" || filesNamesArray[i].search(".md") == -1) {
+	        filesNamesArray.splice(i, 1);
+	    }
+	}
+
+	console.log ("Posts :"+filesNamesArray);
+
+	// We now have all the posts, let's sync them now.
+
+	
 
 	res.send("Synced");
 	console.log("Synced");
+
+	});
+
 };
