@@ -1,4 +1,4 @@
-module.exports = function (mongoose, express) {
+module.exports = function (express) {
 
 
 }

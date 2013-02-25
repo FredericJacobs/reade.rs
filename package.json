@@ -10,6 +10,7 @@
     "jade": "*",
     "stylus": "*",
     "mongoose":"*",
-    "git-wrapper":"*"
+    "git-wrapper":"*",
+    "yaml-front-matter":"*"
   }
 }

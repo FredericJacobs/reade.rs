@@ -26,7 +26,7 @@ module.exports = function(req, res){
 	var fs = require('fs');
 	var filesNamesArray = fs.readdirSync("./posts");
 
-	// Lets only take the markdown files
+	// Lets only take the markdown files for the posts, syncing authors later
 
 	for (var i=filesNamesArray.length-1; i>=0; i--) {
 	    if (filesNamesArray[i] === "README.md" || filesNamesArray[i].search(".md") == -1) {
@@ -38,11 +38,22 @@ module.exports = function(req, res){
 
 	// We now have all the posts, let's sync them now.
 
-	
+	var Story = 
+
+	var yamlFront = require('yaml-front-matter');
+
+	for (var i = filesNamesArray.length - 1; i >= 0; i--) {
+		var yamlHeading = (yamlFront.loadFront("./posts/"+filesNamesArray[i]));
+
+		console.log(yamlHeading);
+
+
+
+	}
+
 
 	res.send("Synced");
 	console.log("Synced");
 
-	});
 
 };

@@ -5,7 +5,7 @@
 
  module.exports = function(req, res){
 
- 	if (req.params.author == "sync" ){
+ 	if (req.params.author == "sync"){
  		// Syncing Route
 		require('./sync.js') (req, res);
  	}

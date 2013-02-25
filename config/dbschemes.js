@@ -1,5 +1,7 @@
 // This function is called to initialize the mongoose db schemes
-module.exports = function (mongoose){
+module.exports = function (server){
+
+var mongoose = server.get('db')
 
 var authorSchema = new mongoose.Schema({
 	bio : String,
@@ -21,7 +23,8 @@ var storySchema = new mongoose.Schema ({
 	category : Array,
 	tags : Array,
 	post : String,
-	thumbnail : String
+	thumbnail : String,
+	syncedInBatch : Boolean
 });
 
  mongoose.model('Author', authorSchema);

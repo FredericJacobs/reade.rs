@@ -30,7 +30,9 @@ app.configure(function(){
 
   // Setupping Mongoose <--> MongoDB
 
-  mongoose.connect('localhost', 'readers');  
+  mongoose.connect('localhost', 'readers');
+
+  app.set('db', mongoose);
 
 });
 
@@ -42,18 +44,16 @@ http.createServer(app).listen(app.get('port'), function(){
   console.log("Alright bro, the site is on ! Port :" + app.get('port'));
 });
 
-// Init the routes
-
-(require('./config/routes.js')) (app, mongoose);
-
-
 // Init the DB Schemes
 
-(require('./config/dbschemes.js')) (mongoose);
+(require('./config/dbschemes.js')) (app);
 
+// Init routes
+
+(require('./config/routes.js')) (app); 
 
 // Launch the application
 
-(require('./app/application.js')) (mongoose, express);
+(require('./app/application.js')) (app);
 
 
