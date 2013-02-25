@@ -8,12 +8,14 @@ module.exports = function(server, next) {
     return server.controllers[filename.toLowerCase()];
   };
 
-  fs.readdirSync(__dirname + '/../app/controllers').forEach(function(filename) {
+  fs.readdirSync(__dirname + '/../controllers').forEach(function(filename) {
     if (!filename.match(ext + '$')) {
       return;
     }
-    server.controllers[filename.replace(RegExp(ext + '$'), '').toLowerCase()] = require(__dirname + '/../app/controllers/' + filename)(server);
+    server.controllers[filename.replace(RegExp(ext + '$'), '').toLowerCase()] = require(__dirname + '/../controllers/' + filename)(server);
   });
-  
-  next();
+
+  if (next) {
+    next();
+  };
 };

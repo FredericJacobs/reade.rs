@@ -48,6 +48,11 @@ http.createServer(app).listen(app.get('port'), function(){
 
 (require('./config/dbschemes.js')) (app);
 
+
+// Init Controllers 
+
+(require('./config/controllers.js')) (app);
+
 // Init routes
 
 (require('./config/routes.js')) (app); 

@@ -16,6 +16,12 @@ module.exports = function(req, res){
 
 // -1-
 
+	var helper = function () {
+		var helper = function (){
+			console.log ("hello")
+		}
+	}
+
 	Git = require ("git-wrapper");
 	var git = new Git({'git-dir':'./posts/.git', 'work-tree':"./"})
 
@@ -38,7 +44,7 @@ module.exports = function(req, res){
 
 	// We now have all the posts, let's sync them now.
 
-	var Story = 
+	//var Story = 
 
 	var yamlFront = require('yaml-front-matter');
 
@@ -47,13 +53,11 @@ module.exports = function(req, res){
 
 		console.log(yamlHeading);
 
-
-
 	}
 
-
 	res.send("Synced");
-	console.log("Synced");
+console.log("Synced");
 
+});
 
 };
