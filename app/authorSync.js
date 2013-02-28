@@ -2,7 +2,7 @@ module.exports = function (yaml, server, next){
 
 Author = server.get("db").model("Author")
 
-Story.findOne({username:yaml.username}).exec(function(err, author){
+Author.findOne({username:yaml.username}).exec(function(err, author){
 
 	if (err) {
 		console.log ("Error "+err+ " looking up user "+ yaml.username);

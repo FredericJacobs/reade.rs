@@ -13,9 +13,10 @@ module.exports = function (server, who){
 					element.syncedInBatch = false;
 					element.save();
 				}else{
+					var deletedElement = element;
 					element.remove(function (err,element){
 						if (!err) {
-							console.log(element +" deleted");
+							console.log(deletedElement +" deleted");
 						};
 					})
 				}

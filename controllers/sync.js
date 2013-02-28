@@ -20,63 +20,73 @@ module.exports = function (server, next){
 
 			Git = require ("git-wrapper");
 			var git = new Git({'git-dir':'./posts/.git', 'work-tree':"./"})
+			fs = require ("fs");
+			yamlFront = require ("yaml-front-matter")
 
 			git.exec("pull", function (){
 
+				// Let's start by syncing stories
+				var authorsDirectoriesArray = [];
+				var basepath = './posts/authors';
 
-				var fs = require('fs');
-				var filesNamesArray = fs.readdirSync("./posts");
+				var files = fs.readdirSync(basepath);
 
-				for (var i=filesNamesArray.length-1; i>=0; i--) {
-					if (filesNamesArray[i] === "README.md" || filesNamesArray[i].search(".md") == -1) {
-						filesNamesArray.splice(i, 1);
+				if (files == undefined) {
+					console.log ("Posts Not Found");
+					return
+				} else{
+					for (var i = files.length - 1; i >= 0; i--) {
+					var fileOrFolder = fs.lstatSync(basepath+"/"+files[i]);
+					if(fileOrFolder.isDirectory()){
+						authorsDirectoriesArray.push(files[i]);
+						console.log("Processing Author : " + files[i]);
+						}
 					}
 				}
 
-	console.log ("Posts :"+filesNamesArray);
+				// We now have all the author folders. Let's sync the authors.
+				var makeOrUpdateAuthor = require("../app/authorSync.js");
 
-	// We now have all the posts, let's sync them now.
-
-
-	var yamlFront = require('yaml-front-matter');
-
-	var makeOrUpdateStory = require("../app/storySync.js");
-
-	for (var i = filesNamesArray.length - 1; i >= 0; i--) {
-		var yamlHeading = (yamlFront.loadFront("./posts/"+filesNamesArray[i]));
-		
-		if (i == 0) {
-			makeOrUpdateStory(yamlHeading, server, require("../app/resetDBFlags.js"));
-		}else {
-			makeOrUpdateStory(yamlHeading, server);
-		}
-	}
-
-	// Now that all posts have been synced, it's time to sync authors
-
-	var makeOrUpdateAuthor = require("../app/authorSync.js");
-
-	var authorFilesNamesArray = fs.readdirSync("./posts/authors");
-
-	for (var i=authorFilesNamesArray.length-1; i>=0; i--) {
-					if (authorFilesNamesArray[i].search(".md") == -1) {
-						authorFilesNamesArray.splice(i, 1);
+				for (var i = authorsDirectoriesArray.length - 1; i >= 0; i--) {
+					var yaml = yamlFront.loadFront(basepath+"/"+authorsDirectoriesArray[i]+"/"+"author_description.md");
+					if (yaml == undefined) {continue;};
+					if (i == 0) {
+						makeOrUpdateAuthor(yaml, server, require("../app/resetDBFlags.js"));
+					}else {
+						makeOrUpdateAuthor(yaml, server);
 					}
-				}
-	for (var i = authorFilesNamesArray.length - 1; i >= 0; i--) {
-		var yaml = (yamlFront.loadFront("./posts/authors/"+authorFilesNamesArray[i]));
+					
+				};
 
-		if (i == 0) {
-			makeOrUpdateAuthor(yaml, server, require("../app/resetDBFlags.js"));
-		}else {
-			makeOrUpdateAuthor(yaml, server);
-		}
-	}
+				// We now have all the authors in the db. Let's sync their posts.
 
+				var makeOrUpdateStory = require("../app/storySync.js");
 
-	res.send("Ok Chief !");
+				for (var i = authorsDirectoriesArray.length - 1; i >= 0; i--) {
+					
+					var postsFileArray = fs.readdirSync(basepath +"/"+authorsDirectoriesArray[i]+"/posts");
 
-});
+					for (var j = postsFileArray.length - 1; j >= 0; j--) {
+						
+						if (postsFileArray[j].search(".md") == -1) {
+							if (i == 0 && j == 0) {(require("../app/resetDBFlags.js"))(server, "Story")};
+							continue;
+						};
+
+						var yaml = (yamlFront.loadFront(basepath+"/"+authorsDirectoriesArray[i]+"/posts/"+postsFileArray[j]));
+						if (yaml == undefined) {continue;};
+
+						if (i == 0 && j==0) {
+							makeOrUpdateStory(yaml, server, require("../app/resetDBFlags.js"));
+						}else {
+							makeOrUpdateStory(yaml, server);
+						}
+					};
+				};
+				
+				res.send("Ok Chief !");
+
+			});
 		}
 	}
 }
