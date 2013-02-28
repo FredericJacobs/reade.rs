@@ -19,7 +19,7 @@ Story.findOne({title:yaml.title}).where('author').equals(yaml.author).exec(funct
 
 		story.layout = yaml.layout;
 		story.published = yaml.published == true;
-		story.publishedAt = new Date(yaml.publishedAt);
+		story.date = new Date(yaml.date);
 		story.slug = yaml.slug;
 		story.category = yaml.category;
 		story.tags = yaml.tags;
