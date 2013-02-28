@@ -1,24 +1,31 @@
-module.exports = function (server){
+module.exports = function (server, who){
 	
 	Story = server.get("db").model("Story");
+	Author = server.get("db").model("Author");
 
-	Story.find(function(err, stories){
-		if (stories) {
-			for (var i = stories.length - 1; i >= 0; i--) {
-				var story = stories[i];
 
-				if (story.syncedInBatch) {
-					console.log("Ressetting flag")
-					story.syncedInBatch = false;
-					story.save();
+	var handleFlags = function (err, elements){
+		if (elements) {
+			for (var i = elements.length - 1; i >= 0; i--) {
+				var element = elements[i];
+
+				if (element.syncedInBatch) {
+					element.syncedInBatch = false;
+					element.save();
 				}else{
-					story.remove(function (err,story){
+					element.remove(function (err,element){
 						if (!err) {
-							console.log(story+"deleted");
+							console.log(element +" deleted");
 						};
 					})
 				}
 			}
 		}
-	});
+	};
+
+	if (who == "Story") {
+		Story.find(handleFlags);
+	}else if (who == "Author"){
+		Author.find(handleFlags);
+	}
 }

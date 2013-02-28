@@ -10,9 +10,9 @@ Story.findOne({title:yaml.title}).where('author').equals(yaml.author).exec(funct
 		return;
 	}else {
 		if (story){
-			console.log("Updating post");
+			console.log("Updating post :" + yaml.title);
 		}else {
-			console.log("Creating post");
+			console.log("Creating post :" + yaml.title);
 			story = new Story({title:yaml.title});
 			story.author = yaml.author;
 		}
@@ -29,11 +29,11 @@ Story.findOne({title:yaml.title}).where('author').equals(yaml.author).exec(funct
 
 		story.save(function (err, story){
 			if (err) {
-				console.log("Saving :"+story+" failed");
+				console.log("Saving : "+ story.title +" failed");
 			};
 
 			if (next) {
-				next(server);
+				next(server, "Story");
 			};
 		});
 

@@ -10,7 +10,8 @@ var authorSchema = new mongoose.Schema({
 	links : {
 		twitter : String,
 		website : String
-	}
+	},
+	syncedInBatch : Boolean
 });
 
 var storySchema = new mongoose.Schema ({

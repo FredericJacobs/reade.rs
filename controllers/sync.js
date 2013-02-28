@@ -27,13 +27,11 @@ module.exports = function (server, next){
 				var fs = require('fs');
 				var filesNamesArray = fs.readdirSync("./posts");
 
-	// Lets only take the markdown files for the posts, syncing authors later
-
-	for (var i=filesNamesArray.length-1; i>=0; i--) {
-		if (filesNamesArray[i] === "README.md" || filesNamesArray[i].search(".md") == -1) {
-			filesNamesArray.splice(i, 1);
-		}
-	}
+				for (var i=filesNamesArray.length-1; i>=0; i--) {
+					if (filesNamesArray[i] === "README.md" || filesNamesArray[i].search(".md") == -1) {
+						filesNamesArray.splice(i, 1);
+					}
+				}
 
 	console.log ("Posts :"+filesNamesArray);
 
@@ -46,7 +44,7 @@ module.exports = function (server, next){
 
 	for (var i = filesNamesArray.length - 1; i >= 0; i--) {
 		var yamlHeading = (yamlFront.loadFront("./posts/"+filesNamesArray[i]));
-
+		
 		if (i == 0) {
 			makeOrUpdateStory(yamlHeading, server, require("../app/resetDBFlags.js"));
 		}else {
@@ -54,7 +52,27 @@ module.exports = function (server, next){
 		}
 	}
 
-	// Now that all posts have been synced, it's time to 
+	// Now that all posts have been synced, it's time to sync authors
+
+	var makeOrUpdateAuthor = require("../app/authorSync.js");
+
+	var authorFilesNamesArray = fs.readdirSync("./posts/authors");
+
+	for (var i=authorFilesNamesArray.length-1; i>=0; i--) {
+					if (authorFilesNamesArray[i].search(".md") == -1) {
+						authorFilesNamesArray.splice(i, 1);
+					}
+				}
+	for (var i = authorFilesNamesArray.length - 1; i >= 0; i--) {
+		var yaml = (yamlFront.loadFront("./posts/authors/"+authorFilesNamesArray[i]));
+
+		if (i == 0) {
+			makeOrUpdateAuthor(yaml, server, require("../app/resetDBFlags.js"));
+		}else {
+			makeOrUpdateAuthor(yaml, server);
+		}
+	}
+
 
 	res.send("Ok Chief !");
 
