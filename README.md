@@ -1,5 +1,10 @@
 # Reade.rs
 
+## Features :
+- Voice of articles
+- Pop-up for links
+- Scroll with indicator like New Republic
+
 ## Technical
 
 ### DB-Schemes

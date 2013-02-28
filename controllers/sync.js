@@ -1,5 +1,3 @@
-module.exports = function(req, res){
-
 /* Let's explain the sync process, 
 
 1) git pull 
@@ -14,50 +12,53 @@ module.exports = function(req, res){
 
 */
 
-// -1-
+module.exports = function (server, next){
 
-	var helper = function () {
-		var helper = function (){
-			console.log ("hello")
-		}
-	}
+	return {
 
-	Git = require ("git-wrapper");
-	var git = new Git({'git-dir':'./posts/.git', 'work-tree':"./"})
+		sync : function (req, res){
 
-	git.exec("pull", function (){
+			Git = require ("git-wrapper");
+			var git = new Git({'git-dir':'./posts/.git', 'work-tree':"./"})
 
-	//- 2 - 
+			git.exec("pull", function (){
 
-	var fs = require('fs');
-	var filesNamesArray = fs.readdirSync("./posts");
+
+				var fs = require('fs');
+				var filesNamesArray = fs.readdirSync("./posts");
 
 	// Lets only take the markdown files for the posts, syncing authors later
 
 	for (var i=filesNamesArray.length-1; i>=0; i--) {
-	    if (filesNamesArray[i] === "README.md" || filesNamesArray[i].search(".md") == -1) {
-	        filesNamesArray.splice(i, 1);
-	    }
+		if (filesNamesArray[i] === "README.md" || filesNamesArray[i].search(".md") == -1) {
+			filesNamesArray.splice(i, 1);
+		}
 	}
 
 	console.log ("Posts :"+filesNamesArray);
 
 	// We now have all the posts, let's sync them now.
 
-	//var Story = 
 
 	var yamlFront = require('yaml-front-matter');
+
+	var makeOrUpdateStory = require("../app/storySync.js");
 
 	for (var i = filesNamesArray.length - 1; i >= 0; i--) {
 		var yamlHeading = (yamlFront.loadFront("./posts/"+filesNamesArray[i]));
 
-		console.log(yamlHeading);
-
+		if (i == 0) {
+			makeOrUpdateStory(yamlHeading, server, require("../app/resetDBFlags.js"));
+		}else {
+			makeOrUpdateStory(yamlHeading, server);
+		}
 	}
 
-	res.send("Synced");
-console.log("Synced");
+	// Now that all posts have been synced, it's time to 
+
+	res.send("Ok Chief !");
 
 });
-
-};
+		}
+	}
+}

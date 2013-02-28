@@ -6,8 +6,8 @@ module.exports = function (server){
 	return {
 		profile : function(req, res){
  			if (req.params.author == "sync"){
- 			// Syncing Route
-				require('./sync.js') (req, res);
+				require('./sync.js')(server).sync(req, res);
+				return;
  			}
 
  			if (req.params.author) {title = req.params.author};

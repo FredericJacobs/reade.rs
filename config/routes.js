@@ -1,6 +1,6 @@
 module.exports = function(server){
 
-	var routes = require('../routes'),
+	var routes = require('../routes');
 	authorController = server.controller("author");
 
 	// Web Server Routes
