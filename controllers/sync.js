@@ -48,7 +48,15 @@ module.exports = function (server, next){
 				var makeOrUpdateAuthor = require("../app/authorSync.js");
 
 				for (var i = authorsDirectoriesArray.length - 1; i >= 0; i--) {
-					var yaml = yamlFront.loadFront(basepath+"/"+authorsDirectoriesArray[i]+"/"+"author_description.md");
+					var yaml;
+
+					try {
+						yaml = require("."+basepath+"/"+authorsDirectoriesArray[i]+"/"+"author_description.yaml");
+					} catch (e){
+						console.log(e.stack || e.toString());
+						continue;
+					}
+
 					if (yaml == undefined) {continue;};
 					if (i == 0) {
 						makeOrUpdateAuthor(yaml, server, require("../app/resetDBFlags.js"));
@@ -83,7 +91,7 @@ module.exports = function (server, next){
 						}
 					};
 				};
-				
+
 				res.send("Ok Chief !");
 
 			});
