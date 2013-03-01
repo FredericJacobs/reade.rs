@@ -1,5 +1,29 @@
+@import 'nib'
+
+@keyframes pulse
+   0%
+     background-color red
+     opacity 1.0
+     -webkit-transform scale(1.0) rotate(0deg)
+   33%
+     background-color blue
+     opacity 0.75
+     -webkit-transform scale(1.1) rotate(-5deg)
+   67%
+     background-color green
+     opacity 0.5
+     -webkit-transform scale(1.1) rotate(5deg)
+   100%
+     background-color red
+     opacity 1.0
+     -webkit-transform scale(1.0) rotate(0deg)
+
 body
   padding: 50px
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif
 a
   color: #00B7FF
+h1
+  animation-name: pulse
+  animation-duration: 3s
+  animation-iteration-count: infinite;

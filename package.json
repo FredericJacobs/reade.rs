@@ -11,6 +11,7 @@
     "stylus": "*",
     "mongoose":"*",
     "git-wrapper":"*",
-    "yaml-front-matter":"*"
+    "yaml-front-matter":"*",
+    "nib":"*"
   }
 }

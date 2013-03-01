@@ -6,12 +6,21 @@
 var express = require('express')
   , http = require('http')
   , path = require('path')
-  , mongoose = require('mongoose');
+  , mongoose = require('mongoose')
+  , nib = require('nib')
+  , stylus = require('stylus');
 
 var app = express();
 
 
 // Bootup setup 
+
+function compile(str, path) {
+  return stylus(str)
+    .set('filename', path)
+    .set('compress', true)
+    .use(nib());
+}
 
 app.configure(function(){
 
@@ -25,7 +34,12 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
-  app.use(require('stylus').middleware(__dirname + '/public'));
+  
+  app.use(stylus.middleware({
+      src: __dirname + '/public',
+      compile: compile
+    }));
+
   app.use(express.static(path.join(__dirname, 'public')));
 
   // Setupping Mongoose <--> MongoDB
