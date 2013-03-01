@@ -4,8 +4,6 @@
  */
 
 exports.index = function(req, res){
-	var title = 'Express';
+	var title = 'Reade.rs';
   	res.render('index', { title: title });
 };
-
-

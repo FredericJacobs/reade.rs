@@ -11,8 +11,7 @@ module.exports = function (server){
  			}
 
  			if (req.params.author) {title = req.params.author};
-  				res.render('index', { title: title 
-  			});
+  				res.render('index', { title: title });
  		}
 	}
 }
