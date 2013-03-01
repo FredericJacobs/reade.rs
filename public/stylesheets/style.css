@@ -1,3 +1,24 @@
-@font-face{font-family:"Yanone-Bold";src:url("/public/fonts/YanoneKaffeesatz/YanoneKaffeesatz-Bold.ttf")}
-body{font:14px "Lucida Grande",Helvetica,Arial,sans-serif;color:#000}
-readers-header{font-family:"Yanone-Bold";color:#000;text-align:center;display:block}
+@font-face {
+  font-family: "Yanone-Bold";
+  src: url("/fonts/YanoneKaffeesatz/YanoneKaffeesatz-Bold.ttf");
+}
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  color: #000;
+  background-image: url("/images/cream_dust.png");
+}
+.black-header-border {
+  display: inline-block;
+  height: 5px;
+  width: 100%;
+  background-color: #000;
+}
+readers-header {
+  margin-top: 6px;
+  font-family: "Yanone-Bold";
+  color: #000;
+  text-align: center;
+  display: block;
+  font-size: 40px;
+  line-height: 35px;
+}

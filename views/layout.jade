@@ -1,24 +1,14 @@
 doctype 5
 html
   head
-    title = title
+    title #{title}
     meta(name="viewport", content="width=device-width")
-    link(rel='stylesheet', href='/public/stylesheets/normalize.css')
-    link(rel='stylesheet', href='/public/stylesheets/foundation.css')
-    link(rel='stylesheet', href='/public/stylesheets/style.css')
-    script(src='/public/javascripts/vendor/custom.modernizr.js')
+    link(rel='stylesheet', href='/stylesheets/normalize.css')
+    link(rel='stylesheet', href='/stylesheets/style.css')
 
   body
-    div(class='contain-to-grid sticky')
-      nav(class="top-bar")
-        h1
-          readers-header Reade.rs
+    readers-header Reade.rs
+    
+    div(class='black-header-border')
 
     block content
-
-    script document.write('<script src=' + ('__proto__' in {} ? '/public/javascripts/vendor/zepto' : '/public/javascripts/vendor/jquery') +'.js><\/script>')
-
-    script(src='/public/javascripts/foundation.min.js')
-    script(src='/public/javascripts/foundation/foundation.reveal.js')
-    script(src='/public/javascripts/foundation/foundation.topbar.js')
-    script $(document).foundation()

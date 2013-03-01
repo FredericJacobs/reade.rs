@@ -5,5 +5,5 @@
 
 exports.index = function(req, res){
 	var title = 'Reade.rs';
-  	res.render('index', { title: title });
+  	res.render('index', {title: title});
 };
