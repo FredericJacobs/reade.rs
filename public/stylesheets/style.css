@@ -1,11 +1,11 @@
 @font-face {
   font-family: "Yanone-Bold";
-  src: url("/fonts/YanoneKaffeesatz/YanoneKaffeesatz-Bold.ttf");
+  src: url("/public/fonts/YanoneKaffeesatz/YanoneKaffeesatz-Bold.ttf");
 }
 body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   color: #000;
-  background-image: url("/images/cream_dust.png");
+  background-image: url("/public/images/cream_dust.png");
 }
 .black-header-border {
   display: inline-block;

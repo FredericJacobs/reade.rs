@@ -1,7 +1,6 @@
 module.exports = function (server){
 	return {
 		article :function (req, res){
-			
 			var authorUsername;
 
 			if (req.params.author == 'public') {console.log ("Did get a public ressource request")};

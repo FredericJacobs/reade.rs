@@ -26,8 +26,8 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
-  app.use(stylus.middleware(__dirname + '/public'));
-  app.use(express.static(path.join(__dirname, 'public')));
+  app.use("/public", stylus.middleware(__dirname + '/public'));
+  app.use("/public", express.static(path.join(__dirname, 'public')));
   // Setupping Mongoose <--> MongoDB
 
   mongoose.connect('localhost', 'readers');

@@ -9,5 +9,5 @@ module.exports = function(server){
 
 	server.get('/', routes.index);
 	server.get('/:author', authorController.profile);
-	//server.get('/:author/:slug', storyController.article);
+	server.get('/:author/:slug', storyController.article);
 };
