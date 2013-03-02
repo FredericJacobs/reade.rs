@@ -7,10 +7,30 @@ html
     link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,800italic,400,600,700,800')
     link(rel='stylesheet', href='/public/stylesheets/normalize.css')
     link(rel='stylesheet', href='/public/stylesheets/style.css')
+    link(rel='stylesheet', href='/public/stylesheets/bootstrap.css')
+    script(type='text/javascript', src="/public/javascripts/jquery-1.9.1.js")
+    script(type='text/javascript', src="/public/javascripts/bootstrap-tooltip.js")
+    script(type='text/javascript', src="/public/javascripts/bootstrap-popover.js")
 
   body
     div(class='navbar')
       readers-header Reade.rs
+      button(href="#", id="hello") Popover
+      
+      select(id="size")
+        option(value="30")
+          a 30
     div(class='sub-navbar-padding')
+
+    script
+      $(function(){ 
+        $("#hello").popover({
+          placement: 'bottom',
+          html: 'true',
+          title : '<li>Choose Font<select id=\"fs\" onchange=\"console.log(JSON.stringify($(\"#fs\")))\"><option value=\"Arial\">Arial</option><option value=\"Verdana \">Verdana </option><option value=\"Impact \">Impact </option><option value=\"Comic Sans MS\">Comic Sans MS</option></select></li>',
+          content : 'test'
+      })})
+      $("#fs").change(function(){$('.changeMe').css("font-family", $(this).val());});
+      $("#size").change(function() {$('.changeMe').css("font-size", $(this).val() + "px");}); 
 
     block content
