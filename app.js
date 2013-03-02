@@ -18,6 +18,13 @@ app.configure(function(){
 
   // Express.JS Web Framework initialization
 
+  function compile(str, path) {
+  return stylus(str)
+    .set('filename', path)
+    .set('compress', true)
+    .use(nib());
+  }
+
   app.set('port', process.env.PORT || 3000);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
@@ -26,7 +33,10 @@ app.configure(function(){
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
-  app.use("/public", stylus.middleware(__dirname + '/public'));
+  app.use("/public", stylus.middleware({
+    src: __dirname+'/public'
+  , compile: compile
+  }));
   app.use("/public", express.static(path.join(__dirname, 'public')));
   // Setupping Mongoose <--> MongoDB
 
