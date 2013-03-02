@@ -1,7 +1,8 @@
 @font-face{font-family:"Yanone-Bold";src:url("/public/fonts/YanoneKaffeesatz/YanoneKaffeesatz-Bold.ttf")}
-body{font-family:'Open Sans',sans-serif;font:14px 'Open Sans',"Lucida Grande",Helvetica,Arial,sans-serif;color:#000;background-image:url("/public/images/cream_dust.png")}
+body{font-family:'Open Sans',sans-serif;font:14px 'Open Sans',"Lucida Grande",Helvetica,Arial,sans-serif;color:#000;background-image:url("/public/images/cream_dust.png");width:100%}
+img{width:100%;height:auto;vertical-align:middle;margin-left:auto;margin-right:auto}
 readers-header{position:relative;top:10px;font-size:40px;font-family:"Yanone-Bold";width:100%}
 .navbar{position:fixed;display:block;top:0;left:0;background-color:rgba(255,255,255,0.8);width:100%;margin:0;z-index:3000;overflow:hidden;text-align:center;border-bottom:5px solid #000}
 .sub-navbar-padding{display:block;background:-webkit-gradient(linear, left bottom, left top, color-stop(0, #fff), color-stop(1, #000));background:-webkit-linear-gradient(bottom, #fff 0%, #000 100%);background:-moz-linear-gradient(bottom, #fff 0%, #000 100%);background:-o-linear-gradient(bottom, #fff 0%, #000 100%);background:-ms-linear-gradient(bottom, #fff 0%, #000 100%);background:linear-gradient(bottom, #fff 0%, #000 100%);width:100%;top:0;left:0;margin:0;height:52px;padding:0}
-.story-container{line-height:1.5;max-width:625px;position:relative;margin:20px auto 0 auto;padding-bottom:100px;font-size:15px}
+.story-container{line-height:1.5;max-width:625px;position:relative;margin:20px auto 0 auto;padding:15px;font-size:15px;min-width:200px;overflow:hidden}
 readers-story-title{font-size:26px}
