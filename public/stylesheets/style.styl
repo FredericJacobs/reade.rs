@@ -4,18 +4,17 @@
   font-family: "Yanone-Bold"
   src: url("/public/fonts/YanoneKaffeesatz/YanoneKaffeesatz-Bold.ttf")
 
-
 body
   font-family: 'Open Sans', sans-serif;
   font: 14px 'Open Sans',"Lucida Grande", Helvetica, Arial, sans-serif
   color:black
+  //background-color: #31383F
   background-image:url("/public/images/cream_dust.png")
   width:100%
 
 img
   width: 100%
   height: auto
-  vertical-align: middle
   margin-left: auto
   margin-right: auto
 
@@ -41,7 +40,7 @@ readers-header
 
 .sub-navbar-padding
   display:block
-  background: linear-gradient(bottom, white, black);
+  background: linear-gradient(bottom, white, black)
   width: 100%
   top:0
   left:0
@@ -53,11 +52,19 @@ readers-header
   line-height : 1.5
   max-width: 625px
   position: relative
-  margin: 20px auto 0px auto
+  margin: 0px auto 100px auto
   padding: 15px
   font-size: 15px
   min-width: 200px
   overflow:hidden
+  //background-color: white
+  border-radius:0 0 5px 5px
+  box-sizing:border-box
 
 readers-story-title
   font-size: 26 px
+
+
+@media only screen and (max-device-width: 400px)
+  .story-container
+    margin: 0px auto 0px auto
