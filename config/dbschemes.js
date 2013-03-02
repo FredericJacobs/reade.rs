@@ -20,7 +20,7 @@ var storySchema = new mongoose.Schema ({
 	author : String,
 	published : Boolean,
 	slug : String,
-	publishedAt : Date,
+	date : Date,
 	category : Array,
 	tags : Array,
 	post : String,

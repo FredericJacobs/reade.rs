@@ -2,5 +2,7 @@ extends layout
 
 block content
   div(class="story-container")
-    readers-story-title #{story.title}
+    h1
+      readers-story-title #{story.title}
+      readers-story-date #{date}
     !{post}

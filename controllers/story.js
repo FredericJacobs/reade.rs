@@ -16,7 +16,9 @@ module.exports = function (server){
 					if (!story) {
 						res.send("Sorry, didn't catch that");
 					}else{
-						res.render('story', {title:story.title, story:story, post:require( "markdown" ).markdown.toHTML(story.post)})
+						var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" ];
+						var publishedDate = monthNames[story.date.getMonth()]+" "+story.date.getFullYear();
+						res.render('story', {title:story.title, story:story, post:require( "markdown" ).markdown.toHTML(story.post), date:publishedDate})
 					}
 				});
  			}
