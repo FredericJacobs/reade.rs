@@ -6,7 +6,6 @@ module.exports = function(server){
 
 	// Web Server Routes
 
-
 	server.get('/', routes.index);
 	server.get('/:author', authorController.profile);
 	server.get('/:author/:slug', storyController.article);

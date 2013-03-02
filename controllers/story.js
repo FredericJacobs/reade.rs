@@ -16,7 +16,7 @@ module.exports = function (server){
 					if (!story) {
 						res.send("Sorry, didn't catch that");
 					}else{
-						res.render('story', {title:story.title})
+						res.render('story', {title:story.title, story:story, post:require( "markdown" ).markdown.toHTML(story.post)})
 					}
 				});
  			}

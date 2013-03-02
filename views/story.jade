@@ -1,7 +1,6 @@
 extends layout
 
 block content
-	div(class = 'row')
-		div(class='large-12 columns')
-			h2 Welcome To This Story
-			p hello
+  div(class="story-container")
+    readers-story-title #{story.title}
+    #{post}

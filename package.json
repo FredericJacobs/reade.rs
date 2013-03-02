@@ -12,6 +12,7 @@
     "mongoose":"*",
     "git-wrapper":"*",
     "yaml-front-matter":"*",
-    "nib":"*"
+    "nib":"*",
+    "markdown":"*"
   }
 }
