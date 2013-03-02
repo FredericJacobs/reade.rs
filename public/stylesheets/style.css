@@ -6,6 +6,6 @@ readers-header{position:relative;top:10px;font-size:40px;font-family:"Yanone-Bol
 .sub-navbar-padding{display:block;background:-webkit-gradient(linear, left bottom, left top, color-stop(0, #fff), color-stop(1, #000));background:-webkit-linear-gradient(bottom, #fff 0%, #000 100%);background:-moz-linear-gradient(bottom, #fff 0%, #000 100%);background:-o-linear-gradient(bottom, #fff 0%, #000 100%);background:-ms-linear-gradient(bottom, #fff 0%, #000 100%);background:linear-gradient(bottom, #fff 0%, #000 100%);width:100%;top:0;left:0;margin:0;height:52px;padding:0}
 .story-container{line-height:1.5;max-width:625px;position:relative;margin:0 auto 100px auto;padding:15px;font-size:15px;min-width:200px;overflow:hidden;-webkit-border-radius:0 0 5px 5px;border-radius:0 0 5px 5px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
 readers-story-title{display:block;text-align:center;width:100%}
-readers-story-date{display:block;text-align:center;width:100%}
+readers-story-date{display:block;text-align:center;width:100%;color:#9199a1;font-weight:600}
 @media only screen and (max-device-width: 400px){.story-container{margin:0 auto 0 auto}
 }
